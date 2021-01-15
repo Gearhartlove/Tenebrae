@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealthSlider : MonoBehaviour
 {
-    float RotateValuez = -2f; //small adjustment removing slight slant
+    float RotateValuez = 0f; //small adjustment removing slight slant
   
     // Update is called once per frame
     void LateUpdate()

@@ -22,7 +22,7 @@ public class CameraScroll : MonoBehaviour
         mouseScrollInput = Input.GetAxis("Mouse ScrollWheel");
 
         camFOV -= mouseScrollInput * zoomSpeed;
-        camFOV = Mathf.Clamp(camFOV, 30, 60);
+        camFOV = Mathf.Clamp(camFOV, 60, 90);
 
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, camFOV, zoomSpeed);
     }
