@@ -5,13 +5,8 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 { 
-
     NavMeshAgent agent;
-    Quaternion rotationToLookAt;
-
-    float _speed = 10f;
-    public float rotateSpeedMovement = 0.075f;
-    float rotateVelocity;
+    float speed = 9f;
     int LeftMouseButton = 1;
 
     // Start is called before the first frame update
@@ -29,34 +24,11 @@ public class PlayerMovement : MonoBehaviour
         {
             RaycastHit hit;
 
-            //Checking if the raycast shot hits something that uses the navmesh system
+            //If raycast hits a baked navmesh material
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
             {
-                ////Movement
-                ////Have the player move to the raycast point.
+                //Move player to raycast position
                 agent.SetDestination(hit.point);
-
-                //Rotation
-                //Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
-                //float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-                //    rotationToLookAt.eulerAngles.y,
-                //    ref rotateVelocity,
-                //    rotateSpeedMovement * (Time.deltaTime * 5));
-
-                //transform.eulerAngles = new Vector3(0, rotationY, 0);
-
-                //PROTO-
-                //if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
-                //{
-                //    Vector3 direction = hit.point - transform.position;
-                //    Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-                //    float step = _speed * Time.deltaTime;
-                //    transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, step);
-
-                //    //transform.rotation = Quaternion.RotateTowards();
-                //    //transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);   
-                //}
             }
 
 
@@ -65,12 +37,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
+        //Rotating agent around objects smoothly when agent is moving
+        if (agent.velocity.sqrMagnitude > Mathf.Epsilon) 
         {
-            //transform.rotation = Quaternion.RotateTowards();
-            transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
+            //Step size is equal to speed times frame time (needed for RotateTowarwds paramter below)
+            var step = speed * Time.deltaTime;
+            Quaternion oldRotation = transform.rotation; //current rotation of the agent
+            Quaternion newRotation = Quaternion.LookRotation(agent.velocity.normalized); //direction the agent is moving
+            transform.rotation = Quaternion.Lerp(oldRotation,newRotation,step); //smooth rotation between old and new rotation
         }
-
-
     }
 }

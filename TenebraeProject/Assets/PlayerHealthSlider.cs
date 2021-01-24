@@ -14,7 +14,9 @@ public class PlayerHealthSlider : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = player.transform.position;
+        Vector3 playerPosition = player.transform.position;
+        playerPosition.y = 6.52f;
+        transform.position = playerPosition;
         transform.LookAt(Camera.main.transform);
         //transform.rotation = fixedRotation;
         transform.Rotate(0f, 180f, RotateValuez);
