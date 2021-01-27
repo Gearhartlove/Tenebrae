@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 { 
     NavMeshAgent agent;
-    float speed = 9f;
+    [SerializeField] float RotationSpeed = 20f;
     int LeftMouseButton = 1;
 
     // Start is called before the first frame update
@@ -30,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
                 //Move player to raycast position
                 agent.SetDestination(hit.point);
             }
-
-
         }
     }
 
@@ -41,10 +39,11 @@ public class PlayerMovement : MonoBehaviour
         if (agent.velocity.sqrMagnitude > Mathf.Epsilon) 
         {
             //Step size is equal to speed times frame time (needed for RotateTowarwds paramter below)
-            var step = speed * Time.deltaTime;
+            var step = RotationSpeed * Time.deltaTime;
             Quaternion oldRotation = transform.rotation; //current rotation of the agent
             Quaternion newRotation = Quaternion.LookRotation(agent.velocity.normalized); //direction the agent is moving
-            transform.rotation = Quaternion.Lerp(oldRotation,newRotation,step); //smooth rotation between old and new rotation
+            Debug.Log(agent.velocity.normalized.x);
+            transform.rotation = Quaternion.Lerp(oldRotation,newRotation,step); //smooth rotation between old and new rotation}
         }
     }
 }
