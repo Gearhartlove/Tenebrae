@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 { 
-    NavMeshAgent agent;
+     public NavMeshAgent agent;
     [SerializeField] float RotationSpeed = 20f;
-    int LeftMouseButton = 1;
+    [SerializeField] Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -16,27 +16,10 @@ public class PlayerMovement : MonoBehaviour
         agent.updateRotation = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //When pressing the left mouse button
-        if (Input.GetMouseButtonDown(LeftMouseButton))
-        {
-            RaycastHit hit;
-
-            //If raycast hits a baked navmesh material
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity))
-            {
-                //Move player to raycast position
-                agent.SetDestination(hit.point);
-            }
-        }
-    }
-
     private void LateUpdate()
     {
         //Rotating agent around objects smoothly when agent is moving
-        if (agent.velocity.sqrMagnitude > Mathf.Epsilon) 
+        if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
         {
             //Step size is equal to speed times frame time (needed for RotateTowarwds paramter below)
             var step = RotationSpeed * Time.deltaTime;
