@@ -89,6 +89,14 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ScrollWheel"",
+                    ""type"": ""Value"",
+                    ""id"": ""e4274108-c6a5-4efd-94ed-f07986b910d5"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -188,6 +196,17 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f408bcc0-afcf-4b43-b064-205d2ea303a6"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -774,6 +793,7 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
         m_Player_dAbility = m_Player.FindAction("dAbility", throwIfNotFound: true);
         m_Player_fAbility = m_Player.FindAction("fAbility", throwIfNotFound: true);
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
+        m_Player_ScrollWheel = m_Player.FindAction("ScrollWheel", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -844,6 +864,7 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_dAbility;
     private readonly InputAction m_Player_fAbility;
     private readonly InputAction m_Player_LeftClick;
+    private readonly InputAction m_Player_ScrollWheel;
     public struct PlayerActions
     {
         private @PlayerActionControls m_Wrapper;
@@ -857,6 +878,7 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
         public InputAction @dAbility => m_Wrapper.m_Player_dAbility;
         public InputAction @fAbility => m_Wrapper.m_Player_fAbility;
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
+        public InputAction @ScrollWheel => m_Wrapper.m_Player_ScrollWheel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -893,6 +915,9 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
                 @LeftClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftClick;
                 @LeftClick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftClick;
                 @LeftClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftClick;
+                @ScrollWheel.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollWheel;
+                @ScrollWheel.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScrollWheel;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -924,6 +949,9 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
                 @LeftClick.started += instance.OnLeftClick;
                 @LeftClick.performed += instance.OnLeftClick;
                 @LeftClick.canceled += instance.OnLeftClick;
+                @ScrollWheel.started += instance.OnScrollWheel;
+                @ScrollWheel.performed += instance.OnScrollWheel;
+                @ScrollWheel.canceled += instance.OnScrollWheel;
             }
         }
     }
@@ -1089,6 +1117,7 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
         void OnDAbility(InputAction.CallbackContext context);
         void OnFAbility(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
+        void OnScrollWheel(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

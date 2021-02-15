@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : PlayerMovement
 {
+    //Fields
+    //Scroll-Wheel
+    [SerializeField] private CameraScroll cameraScroll;
 
     //Keyboard: s
     private void OnStopMoving()
@@ -29,6 +32,16 @@ public class PlayerControls : PlayerMovement
     private void OnLeftClick()
     {
         Debug.Log("Left Click");
+    }
+
+    //Mouse: Scroll-Wheel
+    private void OnScrollWheel(InputValue value)
+    {
+        //reading input value from scroll wheel controls
+        cameraScroll.scrollValue += value.Get<float>() / 100;
+        cameraScroll.scrollValue = Mathf.Clamp(cameraScroll.scrollValue, cameraScroll.scrollMin, cameraScroll.scrollMax);
+        cameraScroll.AdjustFOV(cameraScroll.scrollValue);
+
     }
 
     //Main Abilities

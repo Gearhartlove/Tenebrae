@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bbbf2befc654af9813ab234f18e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   RotationSpeed: 9
   mainCamera: {fileID: 0}
 --- !u!195 &467486236
@@ -652,6 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bbbf2befc654af9813ab234f18e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   RotationSpeed: 24
   mainCamera: {fileID: 963194227}
 --- !u!195 &550133672
@@ -734,6 +736,34 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &550133676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550133668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d527e682294d48508787aef64a095fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  RotationSpeed: 20
+  mainCamera: {fileID: 963194227}
+  cameraScroll: {fileID: 963194230}
+--- !u!114 &550133677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550133668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed59954b5f8495a868401e9fcb387e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &680381325
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,7 +955,6 @@ GameObject:
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   - component: {fileID: 963194231}
-  - component: {fileID: 963194232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1024,40 +1053,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684c5472dfbc349979e0dd44d1ff41d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 963194227}
+  myCamera: {fileID: 963194227}
   zoomSpeed: 35
-  scrollAction:
-    m_Name: Scroll
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 65977f85-ed16-42d0-be53-798b9769a4cc
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: 17b87691-eb7e-4ea2-aef6-85bfaf500bf8
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Scroll
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: dfb0a01e-58f2-4304-bec1-0610d5690221
-      m_Path: <Mouse>/scroll/x
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Scroll
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: 8393289d-1e5a-4596-a8f9-48286899bda0
-      m_Path: 
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Scroll
-      m_Flags: 8
+  scrollValue: 0
+  scrollMin: -1
+  scrollMax: 1
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,37 +1089,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &963194232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2af52a5b49a514c06ac860f618de2170,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: UI
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1071973930
 GameObject:
   m_ObjectHideFlags: 0
