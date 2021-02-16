@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class CameraScroll : MonoBehaviour
 {
     public Camera myCamera;
-    private float camFOV;
-    public float zoomSpeed = 10f;
+    private float camFOV, minFOV = 30f, maxFOV = 60f;
+    public float zoomSpeed = 1f;
 
     public float scrollValue = 0f;
     public float scrollMin = -1.0f;
@@ -20,10 +20,14 @@ public class CameraScroll : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void AdjustFOV(float f)
+    public void AdjustFOV(float scrollValue)
     {
-        camFOV -= scrollValue * zoomSpeed;
-        camFOV = Mathf.Clamp(camFOV, 30, 60);
+        this.scrollValue = scrollValue;
+
+        camFOV -= this.scrollValue * zoomSpeed;
+        camFOV = Mathf.Clamp(camFOV, minFOV, maxFOV);
+
+        if (camFOV == minFOV || camFOV == maxFOV) { this.scrollValue = 0; }
 
         myCamera.fieldOfView = Mathf.Lerp(myCamera.fieldOfView, camFOV, zoomSpeed);
     }

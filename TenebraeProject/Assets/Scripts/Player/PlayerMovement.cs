@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 { 
-     public NavMeshAgent agent;
+    public NavMeshAgent agent;
     [SerializeField] float RotationSpeed = 20f;
     [SerializeField] Camera mainCamera;
 
