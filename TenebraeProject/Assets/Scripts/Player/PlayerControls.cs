@@ -11,6 +11,9 @@ public class PlayerControls : PlayerMovement
     [SerializeField] private CameraScroll cameraScroll;
     //Inventory
     [SerializeField] private PrototypeInventory2 protoInventory2;
+    //Combat
+    [SerializeField] private PlayerCombat playerCombat;
+
     //Keyboard: s
     private void OnStopMoving()
     {
@@ -25,19 +28,15 @@ public class PlayerControls : PlayerMovement
         //If raycast hits a baked navmesh material
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
         {
-            //Item Pick-up 
-            //
-            //Enemy Targeting
+            //Attack
             if (hit.collider.gameObject.GetComponent<Targetable>() != null)
             {
-                Debug.Log("Whack");
+                playerCombat.Attack();
             }
             //Player Move
-            else
-            {
-                //Move player to raycast position
-                agent.SetDestination(hit.point);
-            }
+            //Move player to raycast position
+            else { agent.SetDestination(hit.point); }
+
         }
     }
 

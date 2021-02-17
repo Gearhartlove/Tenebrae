@@ -8,7 +8,7 @@ public class PrototypeInventory2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerInventory = GameObject.Find("Inventory").GetComponent<Canvas>();
+        playerInventory = GameObject.Find("PlayerInventoryCanvas").GetComponent<Canvas>();
         Debug.Log(playerInventory.GetType());
     }
 
