@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Player;
 
 public class PlayerMovement : MonoBehaviour
-{ 
-    public NavMeshAgent agent;
-    [SerializeField] float RotationSpeed = 20f;
-    [SerializeField] Camera mainCamera;
+{
+    private float RotationSpeed = 24f;
+    NavMeshAgent agent;
+    GameObject playerObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        agent = gameObject.GetComponent<NavMeshAgent>();
+        agent = Player.PlayerVariables.Agent;
+        playerObject = Player.PlayerVariables.PlayerGameObject;
         agent.updateRotation = false;
+    }
+
+    public void StopMoving()
+    {
+        agent.SetDestination(playerObject.transform.position);
     }
 
     private void LateUpdate()
@@ -25,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
             var step = RotationSpeed * Time.deltaTime;
             Quaternion oldRotation = transform.rotation; //current rotation of the agent
             Quaternion newRotation = Quaternion.LookRotation(agent.velocity.normalized); //direction the agent is moving
-            transform.rotation = Quaternion.Lerp(oldRotation,newRotation,step); //smooth rotation between old and new rotation}
+            playerObject.transform.rotation = Quaternion.Lerp(oldRotation,newRotation,step); //smooth rotation between old and new rotation}
         }
     }
 }

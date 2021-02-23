@@ -38,7 +38,7 @@ public class PlayerCombat : MonoBehaviour
         //}
     }
 
-    public void Attack()
+    public void Attack(GameObject Player, GameObject Target)
     {
         Debug.Log("Whack!");
     }

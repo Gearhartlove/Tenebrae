@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public class PlayerHealthSlider : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerHealthSlider : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("arthur_01");
+        player = Player.PlayerVariables.PlayerGameObject;
     }
     // Update is called once per frame
     void LateUpdate()
