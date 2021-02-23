@@ -48,12 +48,13 @@ namespace Player
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
             {
                 var objectTag = hit.collider.gameObject.tag;
+                Player.PlayerVariables.PlayerFocus = objectTag;
                 switch (objectTag)
                 {
                     case "Player":
                         break;
                     case "Enemy":
-                        playerCombat.Attack(gameObject, hit.collider.gameObject);
+                        playerCombat.Attack(hit.collider.gameObject);
                         break;
                     case "Interactable":
                         break;

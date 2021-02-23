@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion oldRotation = transform.rotation; //current rotation of the agent
             Quaternion newRotation = Quaternion.LookRotation(agent.velocity.normalized); //direction the agent is moving
             playerObject.transform.rotation = Quaternion.Lerp(oldRotation,newRotation,step); //smooth rotation between old and new rotation}
+
         }
     }
 }

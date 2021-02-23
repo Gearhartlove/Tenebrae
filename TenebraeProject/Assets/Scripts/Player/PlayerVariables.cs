@@ -10,6 +10,7 @@ namespace Player
         public static CameraScroll CameraScrollObject;
         public static PlayerCombat PlayerCombatObject;
         public static PlayerMovement PlayerMovementObject;
+        public static string PlayerFocus;
 
         private void Awake()
         {
