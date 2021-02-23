@@ -68,7 +68,18 @@ namespace Player
         //Mouse: Left-Click
         private void OnLeftClick()
         {
-            Debug.Log("Left Click");
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
+            {
+                //Loot
+                if (hit.collider.gameObject.tag == "Interactable")
+                {
+                    Loot loot = hit.collider.gameObject.GetComponent<Loot>();
+                    GameObject interactable = hit.collider.gameObject;
+                    agent.SetDestination(hit.point);
+                    loot.LootItem(gameObject, interactable);
+                }
+            }
         }
 
         //Mouse: Scroll-Wheel
