@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     {
         agent.SetDestination(playerObject.transform.position);
     }
-
     private void LateUpdate()
     {
         //Rotating agent around objects smoothly when agent is moving

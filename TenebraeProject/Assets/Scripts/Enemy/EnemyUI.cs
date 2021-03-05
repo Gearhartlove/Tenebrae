@@ -25,5 +25,11 @@ public class EnemyUI : MonoBehaviour
         //transform.rotation = fixedRotation;
         //transform.Rotate(0f, 180f, RotateValuez);
         //change the y position
+        //playerPosition.y = 6.52f;
+        //transform.position = playerPosition;
+        transform.LookAt(Camera.main.transform);
+        //transform.rotation = fixedRotation;
+        transform.Rotate(0f, 180f, 0);
+        //change the y position
     }
 }
