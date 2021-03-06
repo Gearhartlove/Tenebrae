@@ -45,6 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181a3fea59c9c4b42a69fb32fac70ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Distance: -1
+  AttackRange: 10
+  Target: 0
+  InRange: 0
+  projectile: {fileID: 0}
+  shotPoint: {fileID: 0}
 --- !u!114 &432332681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3128,6 +3134,7 @@ Transform:
   - {fileID: 432332679}
   - {fileID: 5930651934574693595}
   - {fileID: 5930651934574693593}
+  - {fileID: 1563991740079191796}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -4626,5 +4633,35 @@ Transform:
   m_Children:
   - {fileID: 5930651934574693725}
   m_Father: {fileID: 5930651934574693743}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8159826889763363305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1563991740079191796}
+  m_Layer: 0
+  m_Name: ShotPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1563991740079191796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159826889763363305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.88, y: 1.64, z: 0.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5930651934574693639}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
