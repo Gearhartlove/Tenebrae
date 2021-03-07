@@ -14,6 +14,7 @@ public class PlayerCombat : MonoBehaviour
     private bool InCombat = false;
     public bool Attacking = true;
     public GameObject TargetedEnemy;
+    public float turnSpeed = 90f;
 
     //projectile variables
     public GameObject projectile;
@@ -90,7 +91,7 @@ public class PlayerCombat : MonoBehaviour
         Quaternion _lookRotation =
     Quaternion.LookRotation((to - transform.position).normalized);
 
-        transform.rotation = _lookRotation;
+        PlayerVariables.PlayerGameObject.transform.rotation = _lookRotation;
     }
 }
   
