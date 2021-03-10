@@ -16,5 +16,26 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         gameObject.transform.position = Player.PlayerVariables.PlayerGameObject.transform.position;
+
+        RaycastHit hit;
+
+        //Changing the Cursor depending on what the user is hovering
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
+        {
+            //Interactable Hover
+            if (hit.collider.tag == "Interactable")
+            {
+                Cursor.SetCursor(interactionCursor, hotSpot, cursorMode);
+                //Interactable click
+            }
+            //Enemy Hover
+            else if (hit.collider.tag == "Enemy")
+            {
+                Cursor.SetCursor(combatCursor, hotSpot, cursorMode);
+            }
+            //Default
+            else { Cursor.SetCursor(basicCursor, hotSpot, cursorMode); }
+        }
     }
 }
+
