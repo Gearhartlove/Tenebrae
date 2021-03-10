@@ -107,5 +107,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  lifetime: 2
-  Target: {fileID: 0}

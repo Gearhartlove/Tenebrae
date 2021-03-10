@@ -7,7 +7,7 @@ public class Bar : MonoBehaviour, EnemyActions
     //fields
     public string type = "Bear";
     //reference
-    public BarStats bar = new BarStats();
+    //public BarStats bar = new BarStats();
 
     //value
     string name = "Grizzly Bar";
