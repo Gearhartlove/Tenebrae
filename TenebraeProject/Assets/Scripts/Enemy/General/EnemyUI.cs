@@ -1,35 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Enemy;
 
 public class EnemyUI : MonoBehaviour
 {
-    [Range (-10f, 10f)] [SerializeField] float distanceAbove = 1.48f;
+    [Range(-10f, 10f)] [SerializeField] float distanceAbove = 1.48f;
     [Range(-10f, 10f)] [SerializeField] float xPosition = -0.07f;
     GameObject enemy;
 
+    //HP UI elements
+    Slider sliderHP;
+    float MaxValueHP;
+
+    //Enemy Stats
+    DefaultEnemyStats stats;
+
+    //canvas values
+
+
     private void Start()
     {
+        var stats = DefaultEnemyStats.GetStatType(enemy);
+        sliderHP = transform.GetComponentInChildren<Slider>();
+
+        //max hp
+        sliderHP.maxValue = stats.MaxHP;
+        MaxValueHP = sliderHP.maxValue;
+        //current hp
+        sliderHP.value = stats.CurrentHPValue;
+
+        //enemy 
         enemy = transform.parent.gameObject;
     }
+
     // Update is called once per frame
     void LateUpdate()
     {
+        sliderHP.value = stats.CurrentHPValue;
+        //positioning
         Vector3 enemyPosition = enemy.transform.position;
         enemyPosition.y += distanceAbove;
-        //enemyPosition.y = distanceAbove;
         enemyPosition.x += xPosition;
         transform.position = enemyPosition;
-        //transform.LookAt(Camera.main.transform);
-        //transform.rotation = fixedRotation;
-        //transform.Rotate(0f, 180f, RotateValuez);
-        //change the y position
-        //playerPosition.y = 6.52f;
-        //transform.position = playerPosition;
         transform.LookAt(Camera.main.transform);
-        //transform.rotation = fixedRotation;
         transform.Rotate(0f, 180f, 0);
-        //change the y position
     }
 }

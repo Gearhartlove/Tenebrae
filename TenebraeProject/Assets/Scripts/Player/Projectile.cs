@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Player;
+using Enemy;
 
 public class Projectile : MonoBehaviour
 {
     public float speed;
-    public float lifetime;
     private PlayerCombat playerCombat;
-    public GameObject Target;
+    private GameObject Target;
+    float damage = 20;
 
     //public GameObject destroyEffect;
     private void Awake()
@@ -23,6 +24,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
+
         Target = playerCombat.TargetedEnemy;
         Vector3 TargetDestination = Target.transform.position;
         transform.Translate(-TargetDestination * speed * Time.deltaTime);
@@ -34,9 +36,26 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnColliderEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.name);
+        GameObject target = other.collider.gameObject; //might collide with not original target
+        if (other.collider.gameObject.tag == "Enemy")
+        {
+            //Changing HP //TODO fix this as well
+            //Enemy.defaultEnemyStats stats = target.GetComponentInChildren<Enemy.defaultEnemyStats>();
+            var stats = DefaultEnemyStats.GetStatType(Target);
+            EnemyUI eUI = target.GetComponentInChildren<EnemyUI>();
+
+            //stats.CurrentHPValue -= damage; //damage component
+            //Debug.Log("HP: " + stats.CurrentHPValue);
+
+            //kill enemy
+            //if (stats.CurrentHPValue <= 0)
+            //{
+                //Destroy(target);
+            //}
+        }
+
         DestroyProjectile();
     }
 }

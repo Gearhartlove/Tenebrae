@@ -47,7 +47,7 @@ public class BasicEnemyAI : MonoBehaviour
         Ray ray = new Ray(transform.position, checkDirection);
         if (Physics.Raycast(ray, out hit, maxDistanceToCheck))
         {
-            if(hit.collider.gameObject == player)
+            if (hit.collider.gameObject == player)
             {
                 animator.SetBool("isPlayerVisible", true);
             }

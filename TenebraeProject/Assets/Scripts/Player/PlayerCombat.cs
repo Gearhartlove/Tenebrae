@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour
     public bool Attacking = true;
     public GameObject TargetedEnemy;
     public float turnSpeed = 90f;
+    public bool IsTargetDead = true;
 
     //projectile variables
     public GameObject projectile;
@@ -26,7 +27,7 @@ public class PlayerCombat : MonoBehaviour
     {
         //(directly below) lets player move the enemy after it has been selected, so that they 
         //can move elswhere
-        if (InCombat)
+        if (InCombat && !IsTargetDead)
         {
             DetermineDistance(TargetedEnemy.transform.position); //Is the player in range?
             if (PlayerVariables.PlayerFocus == "Enemy")
@@ -45,6 +46,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!Target)
         {
+            IsTargetDead = false;
             InCombat = true;
             TargetedEnemy = Enemy;
             Target = true;
@@ -65,13 +67,13 @@ public class PlayerCombat : MonoBehaviour
     private void MovePlayer()
     {
         Player.PlayerVariables.Agent.SetDestination(TargetedEnemy.transform.position);
-        DetermineDistance(TargetedEnemy.transform.position);      
+        DetermineDistance(TargetedEnemy.transform.position);
     }
 
     //Perform the attack 
     private void PerformAttack()
     {
-        
+
         //Stop player from moving 
         PlayerVariables.Agent.SetDestination(PlayerVariables.PlayerGameObject.transform.position);
 
@@ -94,4 +96,3 @@ public class PlayerCombat : MonoBehaviour
         PlayerVariables.PlayerGameObject.transform.rotation = _lookRotation;
     }
 }
-  
