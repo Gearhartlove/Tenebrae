@@ -372,11 +372,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 279512936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b1183f4bc3c4fa980c2b7e38c2fafd, type: 3}
+  m_Script: {fileID: 11500000, guid: b7e2d646f534742a08300f5383f16034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAbove: 4
-  xPosition: -1.2
+  distanceAbove: 1.48
+  xPosition: -0.07
 --- !u!114 &279512939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1473,8 +1473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a07bf605f676e498bc4aa8d4c38e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedHero: {fileID: 0}
-  heroPlayer: 0
 --- !u!1 &1016572538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2505,8 +2503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b1183f4bc3c4fa980c2b7e38c2fafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAbove: 0.9
-  xPosition: -0.4
 --- !u!114 &1526181382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7448,7 +7444,7 @@ GameObject:
   - component: {fileID: 1725456465}
   - component: {fileID: 1725456467}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Bar
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7480,9 +7476,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725456459}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d8af85b1be97ff41b2fcb70cfbba8cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 86be8a070f3d0434c98a1131624b05b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: Bear
+  bar: {fileID: 0}
 --- !u!136 &1725456462
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7553,12 +7551,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725456459}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8e596699b12de4ba060a10d265eb48, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c39b0ceec0e24288ae16d83e385a494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {fileID: 1463216074}
-  pointB: {fileID: 1061039128}
-  navMeshAgent: {fileID: 1725456467}
 --- !u!95 &1725456466
 Animator:
   serializedVersion: 3
@@ -7836,7 +7831,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1299988918}
   m_FillRect: {fileID: 861383699}
   m_HandleRect: {fileID: 0}
   m_Direction: 0

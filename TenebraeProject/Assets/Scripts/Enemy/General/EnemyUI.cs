@@ -22,7 +22,8 @@ public class EnemyUI : MonoBehaviour
 
     private void Start()
     {
-        var stats = DefaultEnemyStats.GetStatType(enemy);
+        //object stats = new object(); //not sure about this
+        //stats = DefaultEnemyStats.GetStatType(enemy);
         sliderHP = transform.GetComponentInChildren<Slider>();
 
         //max hp
