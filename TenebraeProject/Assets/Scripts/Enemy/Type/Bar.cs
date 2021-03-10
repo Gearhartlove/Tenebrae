@@ -2,7 +2,7 @@
 using UnityEngine;
 using Enemy;
 
-public class Bar : MonoBehaviour, EnemyActions
+public class Bar : MonoBehaviour
 {
     //fields
     public string type = "Bear";

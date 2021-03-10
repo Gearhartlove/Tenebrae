@@ -11,7 +11,7 @@ public class PlayerCombat : MonoBehaviour
     public float AttackRange = 10f;
     public bool Target = false;
     public bool InRange = false;
-    private bool InCombat = false;
+    public bool InCombat = false;
     public bool Attacking = true;
     public GameObject TargetedEnemy;
     public float turnSpeed = 90f;
@@ -23,11 +23,14 @@ public class PlayerCombat : MonoBehaviour
     public float AttackCooldown = 0; //rename later 
     public float AttackInterval = 3; //rename later
 
+    //enemy variables
+    DefaultEnemyStats enemyStats;
+
     private void Update()
     {
         //(directly below) lets player move the enemy after it has been selected, so that they 
         //can move elswhere
-        if (InCombat && !IsTargetDead)
+        if (InCombat)
         {
             DetermineDistance(TargetedEnemy.transform.position); //Is the player in range?
             if (PlayerVariables.PlayerFocus == "Enemy")
@@ -46,10 +49,15 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!Target)
         {
-            IsTargetDead = false;
-            InCombat = true;
-            TargetedEnemy = Enemy;
-            Target = true;
+            //check if dead
+            enemyStats = Enemy.GetComponent<DefaultEnemyStats>();
+            if (!enemyStats.IsDead)
+            {
+                IsTargetDead = false;
+                InCombat = true;
+                TargetedEnemy = Enemy;
+                Target = true;
+            }
             //DetermineDistance(Enemy.transform.position);
         }
     }

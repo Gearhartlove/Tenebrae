@@ -5,7 +5,7 @@ namespace Enemy
     public class DefaultEnemyStats : MonoBehaviour
     {
         //fields
-
+        public bool IsDead = false;
         //Stats
         public virtual float MaxHP
         {

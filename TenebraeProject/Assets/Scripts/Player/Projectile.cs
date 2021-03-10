@@ -9,7 +9,8 @@ public class Projectile : MonoBehaviour
     public float speed;
     private PlayerCombat playerCombat;
     private GameObject Target;
-    float damage = 20;
+    float damage = 50;
+    EnemyActions enemyActions;
 
     //public GameObject destroyEffect;
     private void Awake()
@@ -43,6 +44,7 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             //Changing HP
+            enemyActions = target.GetComponent<EnemyActions>();
             DefaultEnemyStats stats = target.GetComponentInChildren<DefaultEnemyStats>();
             EnemyUI eUI = target.GetComponentInChildren<EnemyUI>();
 
@@ -50,10 +52,10 @@ public class Projectile : MonoBehaviour
             Debug.Log("HP: " + stats.CurrentHPValue);
 
             //kill enemy
-            //if (stats.CurrentHPValue <= 0)
-            //{
-                //Destroy(target);
-            //}
+            if (stats.CurrentHPValue <= 0)
+            {
+                enemyActions.Death(playerCombat);
+            }
         }
 
         DestroyProjectile();
