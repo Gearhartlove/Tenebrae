@@ -91,6 +91,7 @@ public class PlayerCombat : MonoBehaviour
         {
             //fire projectile
             RotateTowards(TargetedEnemy.transform.position);
+            PlayerVariables.PlayerAnimator.Play("Attack");
             Instantiate(projectile, shotPoint.position, transform.rotation);
             AttackCooldown = AttackInterval;
         }
