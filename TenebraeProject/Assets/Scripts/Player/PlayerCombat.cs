@@ -16,6 +16,7 @@ public class PlayerCombat : MonoBehaviour
     public GameObject TargetedEnemy;
     public float turnSpeed = 90f;
     public bool IsTargetDead = true;
+    [SerializeField] GameObject po;
 
     //projectile variables
     public GameObject projectile;
@@ -84,24 +85,32 @@ public class PlayerCombat : MonoBehaviour
 
         //Stop player from moving 
         PlayerVariables.Agent.SetDestination(PlayerVariables.PlayerGameObject.transform.position);
-
+        RotateTowards(TargetedEnemy.transform.position);
         //rotate towards target
         //Attack
         if (AttackCooldown <= 0)
         {
             //fire projectile
             RotateTowards(TargetedEnemy.transform.position);
+            
             PlayerVariables.PlayerAnimator.Play("Attack");
-            Instantiate(projectile, shotPoint.position, transform.rotation);
+
+            Instantiate(projectile, TargetedEnemy.transform.position, shotPoint.rotation) ;
             AttackCooldown = AttackInterval;
         }
     }
 
     private void RotateTowards(Vector3 to)
     {
-        Quaternion _lookRotation =
-    Quaternion.LookRotation((to - transform.position).normalized);
-
-        PlayerVariables.PlayerGameObject.transform.rotation = _lookRotation;
+        //to.x = 2f;
+        Vector3 from = Player.PlayerVariables.PlayerGameObject.transform.position;
+        //Vector3 shot_from = from;
+        //shot_from.y = 95; //TODO might need to change later
+        //Quaternion player_turn_too = Quaternion.Euler(0, 0, 0);
+        Quaternion tt = Quaternion.LookRotation((to - from).normalized);
+        //only care about diff in y rotation
+        Quaternion tt2 = Quaternion.Euler(0, tt.eulerAngles.y, 0); 
+        //shotPoint.rotation = shot_turn_too;
+        PlayerVariables.PlayerGameObject.transform.rotation = tt2;
     }
 }

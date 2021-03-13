@@ -14,6 +14,7 @@ public class BasicEnemyAI : MonoBehaviour
     private float maxDistanceToCheck = 6.0f;
     private float currentDistance;
     private Vector3 checkDirection;
+    private float distanceTillAgro = 10f;
 
     //Patrol state variables
     //float xMax = 3f;
@@ -24,6 +25,7 @@ public class BasicEnemyAI : MonoBehaviour
     public float Z_Point;
     public float X_Point;
     public NavMeshAgent navMeshAgent;
+    public bool EnterCombat = false;
 
     private int currentTarget;
     private float distanceFromTarget;
@@ -44,8 +46,12 @@ public class BasicEnemyAI : MonoBehaviour
         //First we check distance from the player
         currentDistance = Vector3.Distance(player.transform.position, transform.position);
         animator.SetFloat("distanceFromPlayer", currentDistance);
-        //if (currentDistance < 15) { animator.SetBool("IsIdle", false); }
-        //else { animator.SetBool("IsIdle", true); }
+        if (currentDistance < distanceTillAgro && !EnterCombat)
+        {
+            animator.SetBool("IsIdle", false);
+            EnterCombat = true;
+            Invoke("StartCombat", 0.1f);
+        }
 
         //Then check for visability
         checkDirection = player.transform.position - transform.position;
@@ -93,5 +99,13 @@ public class BasicEnemyAI : MonoBehaviour
         BottomLeftZone = temp; //asign
     }
 
+    private void StartCombat()
+    {
+        animator.SetBool("IsIdle", true);
+    }
 
+    public void Chase()
+    {
+        navMeshAgent.SetDestination(player.transform.position);
+    }
 }
