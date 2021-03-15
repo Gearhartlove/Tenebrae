@@ -1521,6 +1521,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432332681, guid: 7bf201eb93a64ab47857ce81b796a258, type: 3}
+      propertyPath: basicCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 97432ac13614d4d2498d3731e75b4ff8, type: 3}
     - target: {fileID: 432332682, guid: 7bf201eb93a64ab47857ce81b796a258, type: 3}
       propertyPath: pointer
       value: 
@@ -1529,6 +1533,11 @@ PrefabInstance:
       propertyPath: projectile
       value: 
       objectReference: {fileID: 6071198542951749759, guid: 267afb3b8a8394453af0afdd004d0924,
+        type: 3}
+    - target: {fileID: 432332682, guid: 7bf201eb93a64ab47857ce81b796a258, type: 3}
+      propertyPath: TrailObject
+      value: 
+      objectReference: {fileID: 1178873302862901184, guid: e3d70ba1811d8304e8f0acda6f1703fb,
         type: 3}
     - target: {fileID: 3292215398413108436, guid: 7bf201eb93a64ab47857ce81b796a258,
         type: 3}

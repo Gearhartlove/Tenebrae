@@ -16,7 +16,9 @@ public class PlayerCombat : MonoBehaviour
     public GameObject TargetedEnemy;
     public float turnSpeed = 90f;
     public bool IsTargetDead = true;
+    private GameObject trail;
     [SerializeField] GameObject po;
+    [SerializeField] GameObject TrailObject;
 
     //projectile variables
     public GameObject projectile;
@@ -44,6 +46,16 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    //Trail for auto attack 
+    private void FixedUpdate()
+    {
+        if (trail != null)
+        {
+            Vector3 direction = trail.transform.position - TargetedEnemy.transform.position;
+            direction = direction.normalized;
+            trail.transform.position += -direction * 1000 * Time.deltaTime;
+        }
+    }
     //Set targeted enemy, determine the distance between player and enemy
     public void Attack(GameObject Enemy)
     {
@@ -95,7 +107,12 @@ public class PlayerCombat : MonoBehaviour
             
             PlayerVariables.PlayerAnimator.Play("Attack");
 
-            Instantiate(projectile, TargetedEnemy.transform.position, shotPoint.rotation) ;
+            //instantiate the projectile on the target directly
+            Instantiate(projectile, TargetedEnemy.transform.position, shotPoint.rotation);
+
+            //trail to enemy
+            //trail = Instantiate(TrailObject, transform.position, trail.transform.rotation);
+
             AttackCooldown = AttackInterval;
         }
     }
