@@ -50,7 +50,7 @@ public class BasicEnemyAI : MonoBehaviour
         {
             animator.SetBool("IsIdle", false);
             EnterCombat = true;
-            Invoke("StartCombat", 0.1f);
+            Invoke("StartCombat", 0.2f);
         }
 
         //Then check for visability

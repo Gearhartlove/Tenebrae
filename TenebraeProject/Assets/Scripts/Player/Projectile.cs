@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     public float speed;
     private PlayerCombat playerCombat;
     private GameObject Target;
-    float damage = 1;
+    float damage = 34;
     EnemyActions enemyActions;
 
     //public GameObject destroyEffect;

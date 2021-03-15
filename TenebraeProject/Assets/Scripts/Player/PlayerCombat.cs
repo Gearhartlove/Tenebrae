@@ -29,6 +29,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        AttackCooldown -= Time.deltaTime;
         //(directly below) lets player move the enemy after it has been selected, so that they 
         //can move elswhere
         if (InCombat)
@@ -40,23 +41,22 @@ public class PlayerCombat : MonoBehaviour
                 else if (!InRange) { MovePlayer(); }
             }
             else { Attacking = false; }
-
-            if (Target) { AttackCooldown -= Time.deltaTime; }
         }
     }
 
     //Set targeted enemy, determine the distance between player and enemy
     public void Attack(GameObject Enemy)
     {
+        TargetedEnemy = Enemy;
         if (!Target)
-        {
+        {          
             //check if dead
             enemyStats = Enemy.GetComponent<DefaultEnemyStats>();
             if (!enemyStats.IsDead)
             {
                 IsTargetDead = false;
                 InCombat = true;
-                TargetedEnemy = Enemy;
+                //TargetedEnemy = Enemy;
                 Target = true;
             }
             //DetermineDistance(Enemy.transform.position);
@@ -102,15 +102,9 @@ public class PlayerCombat : MonoBehaviour
 
     private void RotateTowards(Vector3 to)
     {
-        //to.x = 2f;
         Vector3 from = Player.PlayerVariables.PlayerGameObject.transform.position;
-        //Vector3 shot_from = from;
-        //shot_from.y = 95; //TODO might need to change later
-        //Quaternion player_turn_too = Quaternion.Euler(0, 0, 0);
         Quaternion tt = Quaternion.LookRotation((to - from).normalized);
-        //only care about diff in y rotation
-        Quaternion tt2 = Quaternion.Euler(0, tt.eulerAngles.y, 0); 
-        //shotPoint.rotation = shot_turn_too;
+        Quaternion tt2 = Quaternion.Euler(0, tt.eulerAngles.y, 0);
         PlayerVariables.PlayerGameObject.transform.rotation = tt2;
     }
 }
