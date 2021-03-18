@@ -93,13 +93,19 @@ namespace Player
 
         }
 
+        public void Death()
+        {
+            Time.timeScale = 0f;
+            //spawn death UI
+        }
+
         //Main Abilities
         //Keyboard: q
-        private void OnQAbility() => Debug.Log("q");
+        private void OnQAbility() => Debug.Log("q"); //hold strong attack
         //Keyboard: w
-        private void OnWAbility() => Debug.Log("w");
+        private void OnWAbility() => Debug.Log("w"); //push back ability
         //Keyboard: e
-        private void OnEAbility() => Debug.Log("e");
+        private void OnEAbility() => Debug.Log("e"); //roll 
         //Keyboard: r
         private void OnRAbility() => Debug.Log("r");
         //Keyboard: d

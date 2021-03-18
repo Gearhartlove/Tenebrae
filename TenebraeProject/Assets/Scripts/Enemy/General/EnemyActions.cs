@@ -7,6 +7,8 @@ namespace Enemy
     {
         //fields
         //DEATH
+        GameObject pGO;
+        PlayerHealthUI pUI;
         EnemyUI eUI;
         Rigidbody eRB;
         DefaultEnemyStats eStats;
@@ -15,10 +17,13 @@ namespace Enemy
         [SerializeField] GameObject loot;
         float despawnTime = 4f;
         NavMeshAgent eNMA;
+        public float attack_speed = 2f;
 
         //instantiation
         private void Start()
         {
+            pGO = Player.PlayerVariables.PlayerGameObject;
+            pUI = pGO.GetComponentInChildren<PlayerHealthUI>();
             eUI = GetComponentInChildren<EnemyUI>();
             eStats = GetComponentInChildren<DefaultEnemyStats>();
             eCollider = GetComponentInChildren<CapsuleCollider>();
@@ -47,7 +52,8 @@ namespace Enemy
         //Attack the player
         public void Attack()
         {
-
+            pUI.SetHP();
+            //trigger animation
         }
 
         //Follow the player 
