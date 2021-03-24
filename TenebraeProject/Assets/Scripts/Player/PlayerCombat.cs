@@ -11,11 +11,12 @@ public class PlayerCombat : MonoBehaviour
     public float AttackRange = 10f;
     public bool Target = false;
     public bool InRange = false;
-    private bool InCombat = false;
+    public bool InCombat = false;
     public bool Attacking = true;
     public GameObject TargetedEnemy;
     public float turnSpeed = 90f;
     public bool IsTargetDead = true;
+    [SerializeField] GameObject po;
 
     //projectile variables
     public GameObject projectile;
@@ -23,11 +24,15 @@ public class PlayerCombat : MonoBehaviour
     public float AttackCooldown = 0; //rename later 
     public float AttackInterval = 3; //rename later
 
+    //enemy variables
+    DefaultEnemyStats enemyStats;
+
     private void Update()
     {
+        AttackCooldown -= Time.deltaTime;
         //(directly below) lets player move the enemy after it has been selected, so that they 
         //can move elswhere
-        if (InCombat && !IsTargetDead)
+        if (InCombat)
         {
             DetermineDistance(TargetedEnemy.transform.position); //Is the player in range?
             if (PlayerVariables.PlayerFocus == "Enemy")
@@ -36,20 +41,24 @@ public class PlayerCombat : MonoBehaviour
                 else if (!InRange) { MovePlayer(); }
             }
             else { Attacking = false; }
-
-            if (Target) { AttackCooldown -= Time.deltaTime; }
         }
     }
 
     //Set targeted enemy, determine the distance between player and enemy
     public void Attack(GameObject Enemy)
     {
+        TargetedEnemy = Enemy;
         if (!Target)
-        {
-            IsTargetDead = false;
-            InCombat = true;
-            TargetedEnemy = Enemy;
-            Target = true;
+        {          
+            //check if dead
+            enemyStats = Enemy.GetComponent<DefaultEnemyStats>();
+            if (!enemyStats.IsDead)
+            {
+                IsTargetDead = false;
+                InCombat = true;
+                //TargetedEnemy = Enemy;
+                Target = true;
+            }
             //DetermineDistance(Enemy.transform.position);
         }
     }
@@ -76,23 +85,26 @@ public class PlayerCombat : MonoBehaviour
 
         //Stop player from moving 
         PlayerVariables.Agent.SetDestination(PlayerVariables.PlayerGameObject.transform.position);
-
+        RotateTowards(TargetedEnemy.transform.position);
         //rotate towards target
         //Attack
         if (AttackCooldown <= 0)
         {
             //fire projectile
             RotateTowards(TargetedEnemy.transform.position);
-            Instantiate(projectile, shotPoint.position, transform.rotation);
+            
+            PlayerVariables.PlayerAnimator.Play("Attack");
+
+            Instantiate(projectile, TargetedEnemy.transform.position, shotPoint.rotation) ;
             AttackCooldown = AttackInterval;
         }
     }
 
     private void RotateTowards(Vector3 to)
     {
-        Quaternion _lookRotation =
-    Quaternion.LookRotation((to - transform.position).normalized);
-
-        PlayerVariables.PlayerGameObject.transform.rotation = _lookRotation;
+        Vector3 from = Player.PlayerVariables.PlayerGameObject.transform.position;
+        Quaternion tt = Quaternion.LookRotation((to - from).normalized);
+        Quaternion tt2 = Quaternion.Euler(0, tt.eulerAngles.y, 0);
+        PlayerVariables.PlayerGameObject.transform.rotation = tt2;
     }
 }

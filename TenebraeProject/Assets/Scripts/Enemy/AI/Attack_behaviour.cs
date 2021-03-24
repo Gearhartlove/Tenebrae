@@ -1,20 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemy;
 
-public class BasicEnemyPatrolState : StateMachineBehaviour
+public class Attack_behaviour : StateMachineBehaviour
 {
+    EnemyActions eA;
+    float attack_interval;
+    float attack_cooldown = 0f;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        eA = animator.GetComponent<EnemyActions>();
+        attack_interval = eA.attack_speed;
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (attack_cooldown <= 0)
+        {
+            eA.Attack();
+            attack_cooldown = attack_interval;
+        }
+        attack_cooldown -= Time.deltaTime;
+        //Debug.Log("attack_cooldown: " + attack_cooldown);
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

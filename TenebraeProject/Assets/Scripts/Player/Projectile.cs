@@ -9,7 +9,8 @@ public class Projectile : MonoBehaviour
     public float speed;
     private PlayerCombat playerCombat;
     private GameObject Target;
-    float damage = 20;
+    float damage = 34;
+    EnemyActions enemyActions;
 
     //public GameObject destroyEffect;
     private void Awake()
@@ -36,26 +37,27 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
-        GameObject target = other.collider.gameObject; //might collide with not original target
-        if (other.collider.gameObject.tag == "Enemy")
+        Debug.Log("hitting");
+        GameObject target = other.gameObject; //might collide with not original target
+        if (other.gameObject.tag == "Enemy")
         {
-            //Changing HP //TODO fix this as well
-            //Enemy.defaultEnemyStats stats = target.GetComponentInChildren<Enemy.defaultEnemyStats>();
-            var stats = DefaultEnemyStats.GetStatType(Target);
+            //Changing HP
+            enemyActions = target.GetComponent<EnemyActions>();
+            DefaultEnemyStats stats = target.GetComponentInChildren<DefaultEnemyStats>();
             EnemyUI eUI = target.GetComponentInChildren<EnemyUI>();
 
-            //stats.CurrentHPValue -= damage; //damage component
-            //Debug.Log("HP: " + stats.CurrentHPValue);
+            stats.CurrentHPValue -= damage; //damage component
 
             //kill enemy
-            //if (stats.CurrentHPValue <= 0)
-            //{
-                //Destroy(target);
-            //}
+            if (stats.CurrentHPValue <= 0)
+            {
+                enemyActions.Death(playerCombat);
+            }
         }
 
         DestroyProjectile();
+
     }
 }

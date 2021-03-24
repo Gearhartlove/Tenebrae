@@ -22,7 +22,8 @@ public class EnemyUI : MonoBehaviour
 
     private void Start()
     {
-        var stats = DefaultEnemyStats.GetStatType(enemy);
+        //DefaultEnemyStats stats = new DefaultEnemyStats();
+        stats = GetComponentInParent<DefaultEnemyStats>();
         sliderHP = transform.GetComponentInChildren<Slider>();
 
         //max hp
@@ -44,7 +45,7 @@ public class EnemyUI : MonoBehaviour
         enemyPosition.y += distanceAbove;
         enemyPosition.x += xPosition;
         transform.position = enemyPosition;
-        transform.LookAt(Camera.main.transform);
-        transform.Rotate(0f, 180f, 0);
+        //transform.LookAt(Camera.main.transform);
+        //transform.Rotate(0f, 180f, 0);
     }
 }

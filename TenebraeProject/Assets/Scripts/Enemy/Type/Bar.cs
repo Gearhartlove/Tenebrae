@@ -2,12 +2,12 @@
 using UnityEngine;
 using Enemy;
 
-public class Bar : MonoBehaviour, EnemyActions
+public class Bar : MonoBehaviour
 {
     //fields
     public string type = "Bear";
     //reference
-    BarStats bar = new BarStats();
+    //public BarStats bar = new BarStats();
 
     //value
     string name = "Grizzly Bar";
