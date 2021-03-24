@@ -49,7 +49,6 @@ public class Projectile : MonoBehaviour
             EnemyUI eUI = target.GetComponentInChildren<EnemyUI>();
 
             stats.CurrentHPValue -= damage; //damage component
-            Debug.Log("HP: " + stats.CurrentHPValue);
 
             //kill enemy
             if (stats.CurrentHPValue <= 0)

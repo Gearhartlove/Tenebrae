@@ -12,6 +12,7 @@ public class PlayerVariables : MonoBehaviour
         public static PlayerMovement PlayerMovementObject;
         public static Animator PlayerAnimator;
         public static string PlayerFocus;
+        public static PlayerAbilityManager AbilityManager;
 
         private void Awake()
         {
@@ -21,6 +22,7 @@ public class PlayerVariables : MonoBehaviour
             CameraScrollObject = GameObject.Find("Main Camera").GetComponent<CameraScroll>();
             PlayerMovementObject = GetComponentInChildren<PlayerMovement>();
             PlayerAnimator = GetComponent<Animator>();
+            AbilityManager = GetComponentInChildren<PlayerAbilityManager>();
         }
 
 

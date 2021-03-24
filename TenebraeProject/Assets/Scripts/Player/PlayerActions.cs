@@ -18,7 +18,9 @@ namespace Player
         //Movement
         private PlayerMovement playerMovement;
         private NavMeshAgent agent;
-        
+        //UI
+        private PlayerAbilityManager abilityManager;
+
         //On Start
         private void Start()
         {
@@ -26,6 +28,7 @@ namespace Player
             playerCombat = Player.PlayerVariables.PlayerCombatObject;
             cameraScroll = Player.PlayerVariables.CameraScrollObject;
             playerMovement = Player.PlayerVariables.PlayerMovementObject;
+            abilityManager = Player.PlayerVariables.AbilityManager;
 
             //Movement
             agent = Player.PlayerVariables.Agent;
@@ -101,11 +104,24 @@ namespace Player
 
         //Main Abilities
         //Keyboard: q
-        private void OnQAbility() => Debug.Log("q"); //hold strong attack
+        //hold strong attack
+        private void OnQAbility()
+        {
+            abilityManager.PressQ();   
+        }
+
         //Keyboard: w
-        private void OnWAbility() => Debug.Log("w"); //push back ability
+        //push back ability
+        private void OnWAbility()
+        {
+            abilityManager.PressW();
+        }
         //Keyboard: e
-        private void OnEAbility() => Debug.Log("e"); //roll 
+        //roll ability
+        private void OnEAbility()
+        {
+            abilityManager.PressE();
+        }
         //Keyboard: r
         private void OnRAbility() => Debug.Log("r");
         //Keyboard: d
