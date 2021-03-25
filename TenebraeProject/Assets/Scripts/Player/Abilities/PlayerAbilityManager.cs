@@ -7,20 +7,21 @@ public class PlayerAbilityManager : MonoBehaviour
     //Q
     GameObject Q;
     CooldownProgress Qcdprog;
-    Qability Qability;
+    Qability q_ability;
     public float Qcd;
 
     //W
     GameObject W;
     CooldownProgress Wcdprog;
-    Qability Wability;
+    Wability w_ability;
     public float Wcd;
 
     //E
     GameObject E;
     CooldownProgress Ecdprog;
-    Qability Eability;
+    Eability e_ability;
     public float Ecd;
+    public float thrust = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -36,20 +37,33 @@ public class PlayerAbilityManager : MonoBehaviour
         //E ability
         E = gameObject.transform.Find("E").gameObject;
         Ecdprog = E.GetComponentInChildren<CooldownProgress>();
+        
+      
     }
 
     public void PressQ()
     {
-        Qcdprog.Check();
+        if (Qcdprog.Check())
+        {
+            
+        }
+
     }
 
     public void PressW()
     {
-        Wcdprog.Check();
+        if (Wcdprog.Check())
+        {
+
+        }
     }
 
     public void PressE()
     {
-        Ecdprog.Check();
+        Eability.thrust = thrust; // for testing
+        if (Ecdprog.Check())
+        {
+            Eability.Roll();
+        }
     }
 }

@@ -13,6 +13,7 @@ public class PlayerVariables : MonoBehaviour
         public static Animator PlayerAnimator;
         public static string PlayerFocus;
         public static PlayerAbilityManager AbilityManager;
+        public static Rigidbody PlayerRigidBody;
 
         private void Awake()
         {
@@ -23,6 +24,7 @@ public class PlayerVariables : MonoBehaviour
             PlayerMovementObject = GetComponentInChildren<PlayerMovement>();
             PlayerAnimator = GetComponent<Animator>();
             AbilityManager = GetComponentInChildren<PlayerAbilityManager>();
+            PlayerRigidBody = GetComponent<Rigidbody>();
         }
 
 

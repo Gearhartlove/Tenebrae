@@ -76,7 +76,8 @@ public class CooldownProgress : MonoBehaviour
         if (IsAvailable == true)
         {
             IsAvailable = false;
+            return true;
         }
-        return IsAvailable;
+        return false;
     }
 }
