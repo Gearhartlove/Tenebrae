@@ -23,7 +23,7 @@ public class PlayerUI : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
         {
             //Interactable Hover
-            if (hit.collider.tag == "Interactable")
+            if (hit.collider.tag == "Loot" || hit.collider.tag == "NPC")
             {
                 Cursor.SetCursor(interactionCursor, hotSpot, cursorMode);
                 //Interactable click

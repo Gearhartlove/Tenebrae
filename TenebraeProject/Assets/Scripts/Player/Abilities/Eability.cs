@@ -14,8 +14,6 @@ public class Eability : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
         {
             //TODO need to clear the NavMeshAgent.SetDestination to where I roll too?
-            Debug.Log("Rolling");
-            Debug.Log(hit.point);
             //idea > face player towards mouse, then add force forward
             Eability.RotateTowards(hit.point);
             PlayerVariables.PlayerRigidBody.AddForce(PlayerVariables.PlayerGameObject.transform.forward * thrust, ForceMode.Impulse);
