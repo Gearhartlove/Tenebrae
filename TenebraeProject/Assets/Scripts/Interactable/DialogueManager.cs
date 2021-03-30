@@ -7,9 +7,12 @@ using System;
 
 public class DialogueManager : MonoBehaviour
 {
-    int node_position = -1;
+    //TODO next: Set up prototype in Unity with the UI
     DNode[] DNodeArray;
     DNode now_node;
+    int node_position = -1;
+    const string skip =
+        "#---------------------------------------------------------------------------";
 
     private void Start()
     {
@@ -20,40 +23,57 @@ public class DialogueManager : MonoBehaviour
         //assign information into nodes
         for (int i = 0; i < lines.Length; i++)
         {
-            //empty line
-
-            if (lines[i] == "#newnode")
+            switch (lines[i])
             {
-                node_position++;
-                DNodeArray[node_position] = new DNode();
-                now_node = DNodeArray[node_position];
-                
-            }
-            else if (lines[i].Length == 0) { Debug.Log("NewLine"); } //add to node sentence array
-            else if (lines[i] == "#key") { now_node.key = Byte.Parse((lines[i]+1)); }
-            else if (lines[i] == "#branch")
-            {
-                //seperate the branches, then put into branch array
-                now_node.branches = SeperateBranches(lines[i]+1);
-            }
-            else if (lines[i] == "#sentences")
-            {
-                int idx = 0; //now_node sentence array index
-                bool sentences = true; //false when at the next node 
-                while (sentences)
-                {
-                    for (int k = i; k < lines.Length; i++)
+                case "#newnode":
+                    node_position++;
+                    DNodeArray[node_position] = new DNode();
+                    now_node = DNodeArray[node_position];
+                    break;
+                case "#key":
+                    now_node.key = Byte.Parse((lines[i + 1]));
+                    break;
+                case "#branch":
+                    //TODO end dialogue with -1 branch idea
+                    now_node.branches = SeperateBranches(lines[i + 1]);
+                    break;
+                case "#sentences":
+                    int sent_idx = 0; //now_node sentence array index
+                    bool sentences = true; //false when at the next node 
+                    while (sentences)
                     {
-                        if (lines[k].Length == 0) { idx++; }
-                        else if (lines[k] == "#key") { sentences = false; i = k; break; } //TODO need to test
-                        else { now_node.sentences[idx] = lines[k]; }
+                        for (int k = i; k < lines.Length; k++)
+                        {
+                            if (lines[k].Length == 0) { sent_idx++; }
+                            else if (lines[k] == "#key" || lines[k] == "#end")
+                            //minus two because i is incredmented after the break
+                            //needs to see the "#newline" and the next line after
+                            { sentences = false; i = k - 2; break; }
+                            else { now_node.sentences[sent_idx] = lines[k]; }
+                        }
                     }
-                }
-                
+                    break;
+                case "#choice":
+                    //TODO work on logic for this part
+                    break;
+                case "#player":
+                    //TODO work on logic for this part
+                    break;
+                case skip: //used to seperate the nodes
+                    continue;
             }
+        }
+
+        //print out the nodes 
+        foreach (DNode d in DNodeArray)
+        {
+            if (d != null)
+                Debug.Log(d.key); //1,2
+            else break; //prevent from iterating through whole array
         }
     }
 
+    //Node Subclass
     private class DNode
     {
         public byte key;
@@ -61,18 +81,17 @@ public class DialogueManager : MonoBehaviour
         public string[] sentences = new string[100];
     }
 
+    //Comma seperate branches
     private byte[] SeperateBranches(string s)
     {
         string[] sa = s.Split(','); //string array
         byte[] ba = new byte[sa.Length]; //same size as previous array
         for (int i = 0; i < sa.Length; i++)
         {
-            ba[i] = Byte.Parse(sa[i]); // string array --> byte array
+            ba[i] =  Byte.Parse(sa[i]); // string array --> byte array
         }
         return ba;
     }
-
-
 }
 
 
