@@ -4,52 +4,71 @@ using UnityEngine;
 
 public class PlayerAbilityManager : MonoBehaviour
 {
+    PlayerHealthUI p_ui;
+
     //Q
     GameObject Q;
     CooldownProgress Qcdprog;
-    Qability Qability;
-    public float Qcd;
+    Qability q_ability;
+    public float Qcd = 0;
 
     //W
     GameObject W;
     CooldownProgress Wcdprog;
-    Qability Wability;
-    public float Wcd;
+    Wability w_ability;
+    public float Wcd = 0;
 
     //E
     GameObject E;
     CooldownProgress Ecdprog;
-    Qability Eability;
-    public float Ecd;
+    Eability e_ability;
+    public float Ecd = 0;
+    public float thrust = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        //general
+        p_ui = Player.PlayerVariables.PlayerHealth_UI;
+
         //Q ability
-        Q = gameObject.transform.Find("Q").gameObject;
-        Qcdprog = Q.GetComponentInChildren<CooldownProgress>();
+        Q = p_ui.gameObject.transform.Find("Q").gameObject;
+        Qcdprog = Q.GetComponent<CooldownProgress>();
 
         //W ability
-        W = gameObject.transform.Find("W").gameObject;
-        Wcdprog = W.GetComponentInChildren<CooldownProgress>();
+        W = p_ui.gameObject.transform.Find("W").gameObject;
+        Wcdprog = W.GetComponent<CooldownProgress>();
 
         //E ability
-        E = gameObject.transform.Find("E").gameObject;
-        Ecdprog = E.GetComponentInChildren<CooldownProgress>();
+        E = p_ui.gameObject.transform.Find("E").gameObject;
+        Ecdprog = E.GetComponent<CooldownProgress>();
+        
+      
     }
 
     public void PressQ()
     {
-        Qcdprog.Check();
+        if (Qcdprog.Check())
+        {
+            
+        }
+
     }
 
     public void PressW()
     {
-        Wcdprog.Check();
+        if (Wcdprog.Check())
+        {
+
+        }
     }
 
     public void PressE()
     {
-        Ecdprog.Check();
+        Eability.thrust = thrust; // for testing
+        if (Ecdprog.Check())
+        {
+            Eability.Roll();
+        }
     }
 }

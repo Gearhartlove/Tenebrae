@@ -18,6 +18,7 @@ namespace Player
         //Movement
         private PlayerMovement playerMovement;
         private NavMeshAgent agent;
+        private float distanceFromTarget;
         //UI
         private PlayerAbilityManager abilityManager;
 
@@ -32,6 +33,7 @@ namespace Player
 
             //Movement
             agent = Player.PlayerVariables.Agent;
+            
         }
 
         //METHODS ---
@@ -70,18 +72,27 @@ namespace Player
         }
 
         //Mouse: Left-Click
+        //TODO working on this :) , implementing interface for streamline logic /
         private void OnLeftClick()
         {
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
             {
                 //Loot
-                if (hit.collider.gameObject.tag == "Interactable")
+                if (hit.collider.gameObject.tag == "Loot")
                 {
                     Loot loot = hit.collider.gameObject.GetComponent<Loot>();
                     GameObject interactable = hit.collider.gameObject;
-                    agent.SetDestination(hit.point);
-                    loot.LootItem(gameObject, interactable);
+                    loot.RunTo(hit.point,agent);
+                    loot.Interact(gameObject, interactable);
+                }
+
+                if (hit.collider.gameObject.tag == "NPC")
+                {
+                    NPC npc = hit.collider.gameObject.GetComponent<NPC>();
+                    GameObject interactable = hit.collider.gameObject;
+                    npc.RunTo(hit.point, agent);
+                    npc.Interact(gameObject, interactable);;
                 }
             }
         }

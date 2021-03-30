@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3922500308477353842}
   m_Layer: 0
   m_Name: LootableItem
-  m_TagString: Interactable
+  m_TagString: Loot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

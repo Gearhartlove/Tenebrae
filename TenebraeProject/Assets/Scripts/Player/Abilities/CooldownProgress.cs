@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CooldownProgress : MonoBehaviour
 {
     //fields
-    PlayerAbilityManager a_manager; //Ability Manager
+    public PlayerAbilityManager a_manager; //Ability Manager
     public TMPro.TextMeshProUGUI cool_text;
     public Image circle_image;
     public float ABILITY_CD;
@@ -17,8 +17,6 @@ public class CooldownProgress : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
-        //Get components from player
-        a_manager = GetComponentInParent<PlayerAbilityManager>();
         cool_text = gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>();
         circle_image = gameObject.GetComponentInChildren<Image>();
         IsAvailable = true;
@@ -76,7 +74,8 @@ public class CooldownProgress : MonoBehaviour
         if (IsAvailable == true)
         {
             IsAvailable = false;
+            return true;
         }
-        return IsAvailable;
+        return false;
     }
 }
