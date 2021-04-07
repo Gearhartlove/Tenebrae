@@ -87,6 +87,7 @@ namespace Player
                     loot.Interact(gameObject, interactable);
                 }
 
+                //NPC
                 if (hit.collider.gameObject.tag == "NPC")
                 {
                     NPC npc = hit.collider.gameObject.GetComponent<NPC>();

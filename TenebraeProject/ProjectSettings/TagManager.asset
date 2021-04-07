@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Loot
   - NPC
+  - Dialogue
   layers:
   - Default
   - TransparentFX

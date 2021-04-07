@@ -68,7 +68,8 @@ public class NPC : MonoBehaviour, IInteractable
     //Custom methods 
     private void StartTalking()
     {
-        //text on screen = array spot one 
+        //text on screen = array spot one
+
     }
 
     private void StopTalking()

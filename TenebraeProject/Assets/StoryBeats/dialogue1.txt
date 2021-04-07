@@ -6,8 +6,8 @@
 #speaker
 John
 #sentences
-Hey Jess, Good morning. You look a little tired, can I get you some 
-caffeine to get your morning started?
+Hey Jess, Good morning. You look a little tired,
+can I get you some caffeine to get your morning started?
 #---------------------------------------------------------------------------
 #newnode
 #key
@@ -55,7 +55,7 @@ you know anything about their snow this season?
 #key
 5
 #branch
--1
+end
 #speaker
 John
 #sentences
@@ -64,5 +64,6 @@ I recomend the east side of the mountain, their is way less people,
 and the snow is just as good.
 
 And sorry to hear about your busy week. 
-I'm always here with some coffee if you need it.
+I'm always here with coffee if you need it. Here's your cookie as well.
+I gave you the biggest one.
 #---------------------------------------------------------------------------
