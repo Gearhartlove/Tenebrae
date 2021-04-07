@@ -9,46 +9,43 @@ using System;
 //TODO portrait code logic
 public class DialogueManager : MonoBehaviour
 {
+    //foundation
     private DNode[] DNodeArray;
     private DNode now_node;
-    [SerializeField]
-    private TMPro.TextMeshProUGUI ContinueText;
-    //[SerializeField]
-    //private TMPro.TextMeshProUGUI ChoiceText;
 
-    //Portrait Logic
-    [SerializeField] private Animator charPortrait;
-    [SerializeField] private Animator npcPortrait;
-
-    
-
+    //node + setence heirarchy/organization in .txt file
     int node_position = -1;
     int node_idx = 0;
     int sent_idx = 0;
     const string skip =
         "#---------------------------------------------------------------------------";
+    //Portrait Logic
+    [SerializeField] private Animator charPortrait;
+    [SerializeField] private Animator npcPortrait;
+
+    //Continue + Choice Dialogue objects
+    [SerializeField]
+    private TMPro.TextMeshProUGUI ContinueText;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI[] ChoiceTexts;
 
     private void Start()
     {
         string[] lines = File.ReadAllLines(@"Assets/StoryBeats/dialogue1.txt");
         DNodeArray = new DNode[100];
+        ChoiceTexts = new TMPro.TextMeshProUGUI[4];
 
         SortInformation(lines);
 
         //print out the nodes
-        //foreach (DNode d in DNodeArray)
+        foreach (DNode d in DNodeArray)
         {
-            //if (d != null)
-            //{
-             //   Debug.Log(d.speaker);
-            //}
+            if (d != null)
+            {
+               //Debug.Log(d.branches[0]);
+            }
             //else break; //prevent from iterating through whole array
         }
-    }
-
-    private void Update()
-    {
-       
     }
 
     //Node Subclass
@@ -56,7 +53,7 @@ public class DialogueManager : MonoBehaviour
     {
         public byte key;
         public bool isChoiceNode = false;
-        public byte[] branches = new byte[5];
+        public byte[] branches = new byte[4];
         public string[] sentences = new string[100];
         public string person;
         public string speaker;
@@ -147,7 +144,13 @@ public class DialogueManager : MonoBehaviour
         //check if the node is a Choice node
         if (DNodeArray[node_idx].isChoiceNode == true)
         {
-            Debug.Log("CHOICE");
+            int choices = 0;
+            //calculate number of choices
+            foreach (byte b in DNodeArray[node_idx].branches)
+                if (b != 0) choices++;
+            //TODO create circle choice graphic and options for user
+            
+            
         }
         else
         {
