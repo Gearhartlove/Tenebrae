@@ -7734,13 +7734,14 @@ GameObject:
   - component: {fileID: 1699458402}
   - component: {fileID: 1699458401}
   - component: {fileID: 1699458400}
+  - component: {fileID: 1699458403}
   m_Layer: 0
   m_Name: Dialogue Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1699458399
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7824,6 +7825,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &1699458403
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699458398}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1809557741
 GameObject:
   m_ObjectHideFlags: 0

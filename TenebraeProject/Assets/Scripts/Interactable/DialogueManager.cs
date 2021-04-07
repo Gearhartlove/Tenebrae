@@ -15,8 +15,11 @@ public class DialogueManager : MonoBehaviour
     private TMPro.TextMeshProUGUI ContinueText;
     //[SerializeField]
     //private TMPro.TextMeshProUGUI ChoiceText;
+
+    //Portrait Logic
     [SerializeField] private Animator charPortrait;
     [SerializeField] private Animator npcPortrait;
+
     
 
     int node_position = -1;
@@ -31,16 +34,15 @@ public class DialogueManager : MonoBehaviour
         DNodeArray = new DNode[100];
 
         SortInformation(lines);
-        StartDialogue();
 
         //print out the nodes
-        foreach (DNode d in DNodeArray)
+        //foreach (DNode d in DNodeArray)
         {
-            if (d != null)
-            {
-                Debug.Log(d.speaker);
-            }
-            else break; //prevent from iterating through whole array
+            //if (d != null)
+            //{
+             //   Debug.Log(d.speaker);
+            //}
+            //else break; //prevent from iterating through whole array
         }
     }
 
@@ -122,27 +124,30 @@ public class DialogueManager : MonoBehaviour
         return ba;
     }
 
-    private void StartDialogue()
+    /*called by the NPC when in range for the first time*/
+    public void StartDialogue()
     {
-        ContinueText.text = DNodeArray[node_idx].sentences[sent_idx];
-
-        //portrait talking
         PortraitTalking(DNodeArray[node_idx]);
+        ContinueText.text = DNodeArray[node_idx].sentences[sent_idx];  
     }
 
+    /*called by the NPC when leaving range for the first time */
+    public void StopDialogue()
+    {
+        PortraitTalking(); //nobody talking
+    }
     public void ContinueDialogue()
     {
-        PortraitTalking(DNodeArray[node_idx]); //where to put this??? TODO
+        PortraitTalking(DNodeArray[node_idx]);
         //go to next sentence
         sent_idx++;
-        //if next sentence does not exist
-        //go to the next node
+        //if next sentence does not exist go to the next node
         if (DNodeArray[node_idx].sentences[sent_idx] == null)
             { node_idx++; sent_idx = 0; }
         //check if the node is a Choice node
         if (DNodeArray[node_idx].isChoiceNode == true)
         {
-
+            Debug.Log("CHOICE");
         }
         else
         {
@@ -167,7 +172,13 @@ public class DialogueManager : MonoBehaviour
             charPortrait.SetBool("isTalking", false);
         }
     }
-    
+
+    /* Neither of the speakers are speaking (leave the range)*/
+    private void PortraitTalking()
+    {
+        charPortrait.SetBool("isTalking", false);
+        npcPortrait.SetBool("isTalking", false);
+    }
 }
 
 
