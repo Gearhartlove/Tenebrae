@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 public class NPC : MonoBehaviour, IInteractable
 {
@@ -8,9 +9,9 @@ public class NPC : MonoBehaviour, IInteractable
     private GameObject Player;
     private GameObject p_hui;
     private CanvasGroup npc_dui; //npc dialogue ui
+    [SerializeField] GameObject continueButton;
 
     private string Name;
-    private bool isInteracting = false;
     private bool oneTimef = false;
     private float talking_distance = 6f;
     //Q: how do I assign this / when? Story beat manager? > hook it up myself
@@ -67,14 +68,16 @@ public class NPC : MonoBehaviour, IInteractable
     //Custom methods 
     private void StartTalking()
     {
+        continueButton.SetActive(true);
         p_hui.SetActive(false);
         npc_dui.alpha = 1;
         dManager.StartDialogue();
     }
 
-    private void StopTalking()
+    private void StopTalking()  
     {
         p_hui.SetActive(true);
+        continueButton.SetActive(false);
         npc_dui.alpha = 0;
         dManager.StopDialogue();
     }

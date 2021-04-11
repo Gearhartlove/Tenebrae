@@ -27,13 +27,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private TMPro.TextMeshProUGUI ContinueText;
     [SerializeField]
-    private TMPro.TextMeshProUGUI[] ChoiceTexts;
+    private GameObject[] Choices;
 
     private void Start()
     {
         string[] lines = File.ReadAllLines(@"Assets/StoryBeats/dialogue1.txt");
         DNodeArray = new DNode[100];
-        ChoiceTexts = new TMPro.TextMeshProUGUI[4];
+        Choices = new GameObject[4];
 
         SortInformation(lines);
 
@@ -149,7 +149,10 @@ public class DialogueManager : MonoBehaviour
             foreach (byte b in DNodeArray[node_idx].branches)
                 if (b != 0) choices++;
             //TODO create circle choice graphic and options for user
-            
+            for (int i = 0; i < choices; i++)
+            {
+                Choices[i].SetActive(true);
+            }
             
         }
         else
