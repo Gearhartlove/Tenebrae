@@ -13,19 +13,7 @@ can I get you some caffeine to get your morning started?
 #key
 2
 #branch
-3,4
-#speaker
-Tenebrae
-#choice
-Yes Coffee
-#choice
-No Coffee
-#---------------------------------------------------------------------------
-#newnode
-#key
 3
-#branch
-5
 #speaker
 Tenebrae
 #sentences
@@ -38,24 +26,9 @@ you know anything about their snow this season?
 #---------------------------------------------------------------------------
 #newnode
 #key
+3
+#branch
 4
-#branch
-5
-#speaker
-Tenebrae
-#sentences
-I'll pass, thank you though. 
-I'm just swinging bye to pick up a chocolate chip-cookie; 
-I'm running late for a study session, finals are killing me. JK.
-
-I'm thinking about hitting the slopes at blue lodge to de-stress, 
-you know anything about their snow this season?
-#---------------------------------------------------------------------------
-#newnode
-#key
-5
-#branch
-end
 #speaker
 John
 #sentences
@@ -66,4 +39,14 @@ and the snow is just as good.
 And sorry to hear about your busy week. 
 I'm always here with coffee if you need it. Here's your cookie as well.
 I gave you the biggest one.
+#---------------------------------------------------------------------------
+#newnode
+#key
+4
+#branch
+end
+#speaker
+Tenebrae
+#sentences
+Sounds like a plan, thanks John!
 #---------------------------------------------------------------------------

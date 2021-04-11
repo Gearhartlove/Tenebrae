@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 
 //TODO portrait code logic
-public class DialogueManager : MonoBehaviour
+public class ArchivedDialogueManager : MonoBehaviour
 {
     //foundation
     private DNode[] DNodeArray;
@@ -34,7 +34,18 @@ public class DialogueManager : MonoBehaviour
         string[] lines = File.ReadAllLines(@"Assets/StoryBeats/dialogue1.txt");
         DNodeArray = new DNode[100];
         Choices = new GameObject[4];
+
         SortInformation(lines);
+
+        //print out the nodes
+        foreach (DNode d in DNodeArray)
+        {
+            if (d != null)
+            {
+               //Debug.Log(d.branches[0]);
+            }
+            //else break; //prevent from iterating through whole array
+        }
     }
 
     //Node Subclass
@@ -88,6 +99,9 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
                     break;
+                //case "#choice":
+                   //now_node.isChoiceNode = true;
+                    //break;
                 case "#speaker":
                     now_node.speaker = lines[i + 1];
                     break;
@@ -141,6 +155,21 @@ public class DialogueManager : MonoBehaviour
             }
             ContinueText.text = DNodeArray[node_idx].sentences[sent_idx];
         }
+        //check if the node is a Choice node
+        //if (DNodeArray[node_idx].isChoiceNode == true)
+        //{
+        //    int choices = 0;
+        //    //calculate number of choices
+        //    foreach (byte b in DNodeArray[node_idx].branches)
+        //        if (b != 0) choices++;
+        //    //TODO create circle choice graphic and options for user
+        //    for (int i = 0; i < choices; i++)
+        //    {
+        //        Choices[i].SetActive(true);
+        //    }
+        //    
+        //}
+        //else
     }
 
     /*method below used for popping up and down the portraits that are talking
