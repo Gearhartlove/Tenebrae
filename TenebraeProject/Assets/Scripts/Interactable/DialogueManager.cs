@@ -35,6 +35,10 @@ public class DialogueManager : MonoBehaviour
         DNodeArray = new DNode[100];
         Choices = new GameObject[4];
         SortInformation(lines);
+        foreach (DNode d in DNodeArray)
+        {
+            //Debug.Log(d?.isEndNode);
+        }
     }
 
     //Node Subclass
@@ -57,7 +61,7 @@ public class DialogueManager : MonoBehaviour
             switch (lines[i])
             {
                 case "#newnode":
-                    node_position++;
+                    node_position++; //starts at -1
                     DNodeArray[node_position] = new DNode();
                     now_node = DNodeArray[node_position];
                     break;
@@ -123,7 +127,6 @@ public class DialogueManager : MonoBehaviour
     }
     public void ContinueDialogue()
     {
-        
         //base case
         if (DNodeArray[node_idx].isEndNode)
         {

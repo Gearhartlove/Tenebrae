@@ -27,6 +27,8 @@ public class NPC : MonoBehaviour, IInteractable
         p_hui = Player.GetComponentInChildren<PlayerHealthUI>().gameObject;
         npc_dui = gameObject.GetComponentInChildren<CanvasGroup>();
         dManager = gameObject.GetComponent<DialogueManager>();
+        continueButton.GetComponent<Button>().onClick.AddListener
+            (dManager.ContinueDialogue);
 
     }
 
