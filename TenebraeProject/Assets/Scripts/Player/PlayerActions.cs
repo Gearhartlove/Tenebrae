@@ -25,14 +25,14 @@ namespace Player
         //On Start
         private void Start()
         {
-            PlayerGameObject = Player.PlayerVariables.PlayerGameObject;
-            playerCombat = Player.PlayerVariables.PlayerCombatObject;
-            cameraScroll = Player.PlayerVariables.CameraScrollObject;
-            playerMovement = Player.PlayerVariables.PlayerMovementObject;
-            abilityManager = Player.PlayerVariables.AbilityManager;
+            PlayerGameObject = PlayerVariables.PlayerGameObject;
+            playerCombat = PlayerVariables.PlayerCombatObject;
+            cameraScroll = PlayerVariables.CameraScrollObject;
+            playerMovement = PlayerVariables.PlayerMovementObject;
+            abilityManager = PlayerVariables.AbilityManager;
 
             //Movement
-            agent = Player.PlayerVariables.Agent;
+            agent = PlayerVariables.Agent;
             
         }
 
@@ -53,7 +53,7 @@ namespace Player
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue()), out hit, Mathf.Infinity))
             {
                 var objectTag = hit.collider.gameObject.tag;
-                Player.PlayerVariables.PlayerFocus = objectTag;
+                PlayerVariables.PlayerFocus = objectTag;
                 switch (objectTag)
                 {
                     case "Player":
@@ -105,7 +105,6 @@ namespace Player
             cameraScroll.scrollValue += value.Get<float>() / 1000;
             cameraScroll.scrollValue = Mathf.Clamp(cameraScroll.scrollValue, cameraScroll.scrollMin, cameraScroll.scrollMax);
             cameraScroll.AdjustFOV(cameraScroll.scrollValue);
-
         }
 
         public void Death()
